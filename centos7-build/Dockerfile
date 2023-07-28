@@ -37,10 +37,8 @@ WORKDIR /home/openmm/build
 
 # Test GLIBC symbols
 CMD ldd --version && \
-    readelf --dyn-syms --wide /home/openmm/build/libOpenMM.so.8.0 | grep @GLIBC_ |  sed 's/^.*@GLIBC_\([0-9\.]*\).*$/\1/' | sort -V | uniq -c
-
-# Start a shell in the container interactively
-CMD ["/bin/bash"]
-
-
+    echo "readelf --dyn-syms --wide /home/openmm/build/libOpenMM.so.8.0 | grep @GLIBC_ |  sed 's/^.*@GLIBC_\([0-9\.]*\).*$/\1/' | sort -V | uniq -c" && \
+    readelf --dyn-syms --wide /home/openmm/build/libOpenMM.so.8.0 | grep @GLIBC_ |  sed 's/^.*@GLIBC_\([0-9\.]*\).*$/\1/' | sort -V | uniq -c  && \
+    echo "readelf --dyn-syms --wide /home/openmm/build/libOpenMM.so.8.0 | grep @GLIBC_2.3 " && \
+    readelf --dyn-syms --wide /home/openmm/build/libOpenMM.so.8.0 | grep @GLIBC_2.3 
 
