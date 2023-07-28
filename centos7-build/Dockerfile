@@ -35,13 +35,12 @@ RUN git clone https://github.com/hmacdope/openmm.git && \
 
 WORKDIR /home/openmm/build
 
-# Start a shell in the container interactively
-CMD ["/bin/bash"]
-
 # Test GLIBC symbols
 CMD ldd --version && \
-    ls && \
     readelf --dyn-syms --wide /home/openmm/build/libOpenMM.so.8.0 | grep @GLIBC_ |  sed 's/^.*@GLIBC_\([0-9\.]*\).*$/\1/' | sort -V | uniq -c
+
+# Start a shell in the container interactively
+CMD ["/bin/bash"]
 
 
 
